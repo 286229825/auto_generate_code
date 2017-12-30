@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 别名定义
+		type：类的全路径
+		alias:别名 -->
+	<typeAliases>
+		<!-- 
+			name:包名
+			MyBatis会自动扫描包中的pojo类，自动定义别名，别名就是类名（首字母大写或小写都可以） -->
+		<package name="po" />
+	</typeAliases>
+	
+	<!-- 和 spring 整合后，environments 将删除 -->
+	<environments default="development">
+		<environment id="development">
+			<!-- 配置JDBC事务管理，由 MyBatis 管理 -->
+			<transactionManager type="JDBC" />
+			<!-- 配置数据库连接，由 MyBatis 管理 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/abc?characterEncoding=utf-8&amp;allowMultiQueries=true" />
+				<property name="username" value="root" />
+				<property name="password" value="286229825" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 加载映射配置文件，路径：包名/映射配置文件的名称 -->
+	<mappers>
+		
+		<!-- 3、批量加载mapper（常用）
+			指定mapper接口包名，MyBatis会自动扫描包下所有mapper.xml进行加载，但需要遵循一下规范：
+				1、需要将mapper接口的类名与mapper.xml名称保持一致，并在同一个目录下。
+				2、前提是需要使用mapper代理的方法。 -->
+		<package name="mapper"/>
+	</mappers>
+</configuration>
