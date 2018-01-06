@@ -4,16 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import generate.DbInfo;
+
 /** 数据库连接获取类
  * @author Administrator
  *
  */
 public class ConnectionUtil {
-	//数据库连接参数
-	private final String DRIVER="com.mysql.jdbc.Driver";
-	private final String URL= "jdbc:mysql://localhost:3306/abc?characterEncoding=utf-8";
-	private final String USER= "root";
-	private final String PASSWORD="286229825";
 	
 	private ConnectionUtil() {}
 	private static ConnectionUtil connectionUtil;
@@ -35,12 +32,12 @@ public class ConnectionUtil {
 	/** 获取数据库连接
 	 * @return
 	 */
-	public Connection getConnection() {
+	public Connection getConnection(DbInfo dbInfo) {
 		try {
 			//加载数据库驱动
-			Class.forName(DRIVER);
+			Class.forName(dbInfo.getDriver());
 			//获取数据库连接
-			return DriverManager.getConnection(URL, USER, PASSWORD);
+			return DriverManager.getConnection(dbInfo.getUrl(), dbInfo.getUser(), dbInfo.getPassword());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

@@ -40,17 +40,23 @@ public class CodeGenerator {
 	// mapperXML模版名称
 	private static final String MAPPERXML_TEMPLATE = "MapperXML.ftl";
 	
-	public static void generate(String ...tableNames) throws Exception {
+	/** 自动生成代码
+	 * @param dbInfo ：数据库连接信息，调用其有参构造来创建其对象
+	 * @param tableNames ：需要生成代码的数据库表
+	 * @throws Exception
+	 */
+	public static void generate(DbInfo dbInfo,String ...tableNames) throws Exception {
 		for (String tableName : tableNames) {
-			generateModel(tableName, TableDataUtil.getTableData(tableName));
-			generateMapperXML(tableName, TableDataUtil.getTableData(tableName));
+			ResultSet tableData = TableDataUtil.getTableData(dbInfo,tableName);
+			generateModel(tableName, tableData);
+			generateMapperXML(tableName, tableData);
 			generateMapper(tableName);
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
-		generate("user","authority");
-	}
+//	public static void main(String[] args) throws Exception {
+//		generate("user","authority");
+//	}
 
 	/**
 	 * 通过freemarker的模版自动生成相关代码

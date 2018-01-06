@@ -90,7 +90,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			<include refid="query_where"></include>
 		</where>
-		LIMIT <@p value="#{"/>startRow},<@p value="#{"/>rows}
+		<if test="<@p value='#{'/>startRow} != null and <@p value="#{"/>rows} != null">
+			LIMIT <@p value="#{"/>startRow},<@p value="#{"/>rows}
+		</if>
 	</select>
 
 </mapper>
