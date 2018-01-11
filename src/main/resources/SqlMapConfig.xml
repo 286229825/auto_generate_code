@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 	<!-- 别名定义
 		type：类的全路径
-		alias:别名 -->
+		alias:别名定义 -->
 	<typeAliases>
 		<!-- 
 			name:包名
